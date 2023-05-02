@@ -1,0 +1,141 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVR
+from matplotlib import pyplot as plt
+pd.pandas.set_option('display.max_columns', None)
+df = pd.read_csv('./raw_data/all_seasons.csv')
+df.drop(columns=df.columns[0], inplace=True)
+df.head()
+df.tail()
+
+def code_player(df):
+    unique_values_player = df[["player_name","player_height","player_weight"]].drop_duplicates()
+    unique_values_player = unique_values_player.reset_index(drop=True)
+    unique_values_player.reset_index(inplace=True)
+    unique_values_player.rename(columns={"index":"ID"},inplace=True)
+    return unique_values_player
+
+def clean_data(df,unique_values_player,history_num=3):
+    merged_df = pd.merge(unique_values_player, df, on=["player_name","player_height","player_weight"])
+    merged_df.drop(columns=["player_name","player_height","player_weight","draft_year","draft_round","draft_number"], inplace=True)
+    merged_df.drop(columns=["team_abbreviation","college","country"],inplace=True)
+    filtered_df = merged_df.groupby('ID').filter(lambda x:len(x)>=history_num)
+    filtered_df.sort_values(by=["ID","season"],ascending=[True,True])
+    filtered_df.drop(columns=["season"],inplace=True)
+    filtered_df["season_no"] = filtered_df.groupby("ID").cumcount()+1
+    filtered_df["total_season"] = filtered_df.groupby("ID")["ID"].transform("count")
+    dataset = filtered_df.reset_index(drop=True)
+    return dataset
+
+def data_augmentation(data,subset_rows=5):
+    subblocks = []
+    cnt = 0
+    subset_rows = 5
+    for attribute,group in dataset.groupby("ID"):
+        len_group = len(group)
+        group = group.reset_index(drop=True)
+        if len_group > subset_rows:
+            for i in range(len_group-subset_rows+1):
+                subgroup = group.loc[i:i+subset_rows-1].copy()
+                subgroup["block_id"] = cnt
+                subblocks.append(subgroup)
+                cnt += 1
+        else:
+            group["block_id"] = cnt
+            subblocks.append(group)
+            cnt += 1
+    augmented_data = pd.concat(subblocks).reset_index(drop=True)
+    return augmented_data
+
+def splite_data(data,column):
+    train_ratio = 0.8
+    test_ratio = 1-train_ratio
+    data_id = data[[column]].drop_duplicates().values.flatten()
+    n = len(data_id)
+    np.random.shuffle(data_id)
+    train_ids = data_id[0:int(n*train_ratio)]
+    test_ids = data_id[int(n*train_ratio):]
+    train_set = [data[data[column] == train_id] for train_id in train_ids]
+    train_set = pd.concat(train_set)
+    test_set = [data[data[column] == test_id] for test_id in test_ids]
+    test_set = pd.concat(test_set)
+    train_set.to_csv(f'./dataset/trainset_{column}.csv', index=False)
+    test_set.to_csv(f'./dataset/testset_{column}.csv', index=False)
+
+def get_X(df):
+    return pd.DataFrame(df[0:-1])
+def get_y(df):
+    return pd.DataFrame(df[len(df)-1:len(df)])
+def load_data(column):
+    train_data = pd.read_csv(f"./dataset/trainset_{column}.csv",index_col=False)
+    test_data = pd.read_csv(f"./dataset/testset_{column}.csv",index_col=False)
+    X_train = train_data.groupby(column).apply(lambda x:get_X(x)).reset_index(drop=True)
+    y_train = train_data.groupby(column).apply(lambda x:get_y(x)).reset_index(drop=True)
+    X_test = test_data.groupby(column).apply(lambda x:get_X(x)).reset_index(drop=True)
+    y_test = test_data.groupby(column).apply(lambda x:get_y(x)).reset_index(drop=True)
+    return X_train,y_train,X_test,y_test
+
+def build_features(df):
+    age = df.age.values[-1]
+    gp_mean = np.mean(df.gp.values)
+    pts_mean = np.mean(df.pts.values)
+    pts_last1year= df.pts.values[-1]
+    pts_last2year = df.pts.values[-2]
+    net_mean = np.mean(df.net_rating.values)
+    ts_mean = np.mean(df.ts_pct.values)
+    usg_mean = np.mean(df.usg_pct.values)
+    n_season = df['season_no'].values[-1]
+    data = np.array([[age, gp_mean, pts_mean, pts_last1year, pts_last2year, net_mean,ts_mean, usg_mean, n_season]])
+    return pd.DataFrame(data)
+
+def extract_feature(column,X_train,y_train,X_test,y_test):
+    df_feature_train = X_train.sort_values([column],ascending=[True]).groupby(column).apply(lambda x: build_features(x))
+    x_feature_train = df_feature_train.values
+    labels_train = y_train.sort_values([column],ascending=[True]).pts.values
+
+    df_feature_test = X_test.sort_values([column],ascending=[True]).groupby(column).apply(lambda x: build_features(x))
+    x_feature_test = df_feature_test.values
+    labels_test = y_test.sort_values([column],ascending=[True]).pts.values
+    return x_feature_train,labels_train,x_feature_test,labels_test
+
+
+def process_raw_data(df, min_num=3, block_size=5):
+    unique_values_player = code_player(df)
+    dataset = clean_data(df, unique_values_player, min_num)
+    augmented_data = data_augmentation(dataset, block_size)
+    splite_data(augmented_data, "block_id")
+    splite_data(dataset, "ID")
+
+
+def get_processed_data(column):
+    x_feature_train, labels_train, x_feature_test, labels_test = extract_feature(column, *load_data(column))
+
+    scaler = StandardScaler()
+    scaler.fit(x_feature_train)
+    x_feature_train = scaler.transform(x_feature_train)
+    x_feature_test = scaler.transform(x_feature_test)
+    return x_feature_train, labels_train, x_feature_test, labels_test
+
+
+def data_pipeline(df, is_augmented, min_num=3, block_size=5):
+    if is_augmented:
+        column = "block_id"
+    else:
+        column = "ID"
+    process_raw_data(df, min_num=3, block_size=5)
+    x_feature_train, labels_train, x_feature_test, labels_test = get_processed_data(column)
+    return x_feature_train, labels_train, x_feature_test, labels_test
+
+x_feature_train,labels_train,x_feature_test,labels_test = data_pipeline(df,0,block_size=6)
+lr = LinearRegression()
+lr.fit(x_feature_train, labels_train)
+y_pred_test = lr.predict(x_feature_test)
+y_pred_train = lr.predict(x_feature_train)
+mse_test = mean_squared_error(labels_test, y_pred_test)
+mse_train = mean_squared_error(labels_train, y_pred_train)
+print(mse_test)
+print(mse_train)
