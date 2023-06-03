@@ -23,7 +23,7 @@ as needed.
 By achieving these goals, we hope to provide a reliable tool for predicting NBA player 
 performance, which can be used to inform team strategies and personnel decisions.
 
-## Data augmentation
+## Data Augmentation
 We standardized the data and performed data augmentation on the original dataset. 
 Specifically, for players with N historical data points (N > n > 3), we split their original dataset 
 into N-n+1 subsets, each containing n data points, where n is an optimizable hyperparameter. The 
