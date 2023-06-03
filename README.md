@@ -1,4 +1,4 @@
-# NBAplayer_Performance_Pred
+# NBAplayer_Performance_Prediction
 Predict players’ performance (e.g. pts, rebs, and ast (average number of points,  rebounds, and assists)) this season based on the statistics in previous seasons.
 
 For the projects developed by the team, the contributors are not only me but also :
