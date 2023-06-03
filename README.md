@@ -15,14 +15,16 @@ as needed.
 
 By achieving these goals, we hope to provide a reliable tool for predicting NBA player 
 performance, which can be used to inform team strategies and personnel decisions.
+
 ## Data augmentation
 We standardized the data and performed data augmentation on the original dataset. 
 Specifically, for players with N historical data points (N > n > 3), we split their original dataset 
 into N-n+1 subsets, each containing n data points, where n is an optimizable hyperparameter. The 
 starting index of each subset was within the range [0, N-n] from the original dataset. The results 
 showed a significant improvement in the model's performance on the augmented dataset.
+
 ### Feature Engineering
-| 表格  | 第一列  | 第二列  |
+| feature of pts prediction  | feature of reb prediction  | feature of ast prediction |
 |:----:|:----:|:----:|
 |  age  |   age   |   age   |
 | avg pg | avg pg  | avg pg  |
@@ -32,7 +34,7 @@ showed a significant improvement in the model's performance on the augmented dat
 | avg net_rating | avg net_rating  | avg net_rating  |
 | avg usg_pct | avg oreb_pct | avg usg_pct |
 | avg ast_pct | avg dreb_pct | avg ast_pct |
-| #th_season | season_no | season_no |
+| season_no | season_no | season_no |
 
 
 feature 1: age    
