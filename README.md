@@ -23,7 +23,7 @@ starting index of each subset was within the range [0, N-n] from the original da
 showed a significant improvement in the model's performance on the augmented dataset.
 ### Feature Engineering
 | 表格  | 第一列  | 第二列  |
-| --- |:----:|:----:|
+|:----:|:----:|:----:|
 |  age  |   age   |   age   |
 | avg pg | avg pg  | avg pg  |
 | avg pts | avg rebs  | avg ast  |
