@@ -39,35 +39,5 @@ showed a significant improvement in the model's performance on the augmented dat
 | avg ast_pct | avg dreb_pct | avg ast_pct |
 | season_no | season_no | season_no |
 
-
-feature 1: age    
-feature 2: avg pg  
-feature 3: avg ast  
-feature 4: ast of lastest 1 year  
-feature 5: ast of lastest 2 year  
-feature 6: avg net_rating  
-feature 7: avg usg_pct  
-feature 8: avg ast_pct  
-feature 9: #th_season
-
-### input feature of reb prediction
-feature 1: age    
-feature 2: avg pg  
-feature 3: avg rebs  
-feature 4: rebs of lastest 1 year  
-feature 5: rebs of lastest 2 year  
-feature 6: avg net_rating  
-feature 7: avg oreb_pct  
-feature 8: avg dreb_pct  
-feature 9: season_no
-
-### input feature of ast prediction
-feature 1: age    
-feature 2: avg pg  
-feature 3: avg ast  
-feature 4: ast of lastest 1 year  
-feature 5: ast of lastest 2 year  
-feature 6: avg net_rating  
-feature 7: avg usg_pct  
-feature 8: avg ast_pct  
-feature 9: season_no
+Correlation of each feature
+[img](https://github.com/RayJiazy/NBAplayer_Performance_Pred/blob/main/images/1685768354627.jpg)
