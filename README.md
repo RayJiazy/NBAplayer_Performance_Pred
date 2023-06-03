@@ -73,7 +73,9 @@ showed a significant improvement in the model's performance on the augmented dat
         <td>MLP-4layers</td><td>2.864</td><td>1.161</td><th>0.782</th><td>2.153</td><td>0.837</td><th>0.538</th><td>0.552</td><td>0.536</td><th>0.578</th>
     </tr>
 </table>
+
 *Compare RMSE loss with augmented and non-augmented dataset*
+
 <table>
     <tr>
         <th></th><th colspan="3">Origin dataset</th><th colspan="3">Augmented dataset</th>
