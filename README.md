@@ -64,10 +64,10 @@ showed a significant improvement in the model's performance on the augmented dat
         <td>Decision Tree</td><td>3.183</td><td>1.208</td><td>0.823</td><td>2.412</td><td>0.893</td><td>0.590</td><td>0.502</td><td>0.517</td><td>0.555</td>
     </tr>
     <tr>
-        <td>Random Forest</td><td>2.978</td><td>1.178</td><td>0.797</td><td>2.268</td><td>0.8400</td><td>0.568</td><td>0.534</td><td>0.529</td><td>0.570</td>
+        <td>Random Forest</td><td>2.978</td><td>1.178</td><td>0.797</td><td>2.268</td><td>0.840</td><td>0.568</td><td>0.534</td><td>0.529</td><td>0.570</td>
     </tr>
     <tr>
-        <td>SVR</td><th>2.830</th><th>1.159</th><td>0.790</td><th>2.127</th><th>0.8400</th><td>0.541</td><th>0.558</th><th>0.537</th><td>0.573</td>
+        <td>SVR</td><th>2.830</th><th>1.159</th><td>0.790</td><th>2.127</th><th>0.840</th><td>0.541</td><th>0.558</th><th>0.537</th><td>0.573</td>
     </tr>
     <tr>
         <td>MLP-4layers</td><td>2.864</td><td>1.161</td><th>0.782</th><td>2.153</td><td>0.837</td><th>0.538</th><td>0.552</td><td>0.536</td><th>0.578</th>
@@ -103,4 +103,19 @@ showed a significant improvement in the model's performance on the augmented dat
     </tr>
 </table>
 
+## Instruction
+## Environment
+* Pytorch
+* Pandas
+* Sklearn
+* Numpy
+
+## References
+[1] "NBA Players," [Online]. Available: [https://www.kaggle.com/datasets/justinas/nba-players-data](https://www.kaggle.com/datasets/justinas/nba-players-data)
+
+[2] "College Students' NBA Performance Analysis," [Online]. Available: [https://www.kaggle.com/datasets/justinas/nba-players-data](https://www.kaggle.com/datasets/justinas/nba-players-data)
+
+[3]	“Decision Trees in Machine Learning,” [Online].Available: [https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052](https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052)
+
+[4]	Vangelis Sarlis a, Vasilis Chatziilias b, Christos Tjortjis a, Dimitris Mandalidis b, A Data Science approach analysing the Impact of Injuries on Basketball Player and Team Performance, Information Systems, Volume 99, July 2021, 101750
 
