@@ -43,7 +43,7 @@ showed a significant improvement in the model's performance on the augmented dat
 ![image](https://github.com/RayJiazy/NBAplayer_Performance_Pred/blob/main/images/1685768354627.jpg)
 
 ## Results
-
+*RMSE/MAE/R-squared evaluation of different models*
 <table>
     <tr>
         <th></th><th colspan="3">RMSE</th><th colspan="3">MAE</th><th colspan="3">R-squared</th>
@@ -52,7 +52,7 @@ showed a significant improvement in the model's performance on the augmented dat
         <td></td><td>pts</td><td>reb</td><td>ast</td><td>pts</td><td>reb</td><td>ast</td><td>pts</td><td>reb</td><td>ast</td>
     </tr>
     <tr>
-        <td>Trivial system</td><td>6.936</td><td>2.500</td><td>1.851</td><td>4.835</td><td>1.803</td><td>1.503</td><td></td><td></td><td></td>
+        <td>Trivial system</td><td>6.936</td><td>2.500</td><td>1.851</td><td>4.835</td><td>1.803</td><td>1.503</td><td>\</td><td>\</td><td>\</td>
     </tr>
     <tr>
         <td>Linear Regression(baseline)</td><td>2.948</td><td>1.168</td><td>0.812</td><td>2.145</td><td>0.837</td><td>0.549</td><td>0.540</td><td>0.532</td><td>0.556</td>
@@ -73,7 +73,7 @@ showed a significant improvement in the model's performance on the augmented dat
         <td>MLP-4layers</td><td>2.864</td><td>1.161</td><th>0.782</th><td>2.153</td><td>0.837</td><th>0.538</th><td>0.552</td><td>0.536</td><th>0.578</th>
     </tr>
 </table>
-
+*Compare RMSE loss with augmented and non-augmented dataset*
 <table>
     <tr>
         <th></th><th colspan="3">Origin dataset</th><th colspan="3">Augmented dataset</th>
