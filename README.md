@@ -41,4 +41,4 @@ showed a significant improvement in the model's performance on the augmented dat
 
 Correlation of each feature
 
-[image](https://github.com/RayJiazy/NBAplayer_Performance_Pred/blob/main/images/1685768354627.jpg)
+![image](https://github.com/RayJiazy/NBAplayer_Performance_Pred/blob/main/images/1685768354627.jpg)
