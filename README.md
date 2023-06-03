@@ -40,4 +40,5 @@ showed a significant improvement in the model's performance on the augmented dat
 | season_no | season_no | season_no |
 
 Correlation of each feature
-[img](https://github.com/RayJiazy/NBAplayer_Performance_Pred/blob/main/images/1685768354627.jpg)
+
+[!img](https://github.com/RayJiazy/NBAplayer_Performance_Pred/blob/main/images/1685768354627.jpg)
