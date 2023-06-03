@@ -1,6 +1,10 @@
 # NBAplayer_Performance_Pred
 Predict players’ performance (e.g. pts, rebs, and ast (average number of points,  rebounds, and assists)) this season based on the statistics in previous seasons.
 
+For the projects developed by the team, the contributors are not only me but also :
+
+[@ChengweiZhou](https://github.com/ChengwZhou)
+
 ## The goal of this project
 1.Data preprocessing and feature engineering: Clean and prepare the dataset for analysis, identify 
 relevant features, and potentially create new ones to improve model performance.
@@ -104,6 +108,19 @@ showed a significant improvement in the model's performance on the augmented dat
 </table>
 
 ## Instruction
+Run Decision Tree and Random Forest
+```
+python NonLinearRegressor.py
+```
+Run Linear Regression and Ridge Regression
+```
+python NonProbabilistic.py
+```
+Run SVR
+```
+python MultipredSVR.py
+```
+
 ## Environment
 * Pytorch
 * Pandas
