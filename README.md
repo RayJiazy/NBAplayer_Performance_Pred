@@ -4,10 +4,13 @@ Predict players’ performance (e.g. pts, rebs, and ast (average number of point
 ## The goal of this project
 1.Data preprocessing and feature engineering: Clean and prepare the dataset for analysis, identify 
 relevant features, and potentially create new ones to improve model performance.
+
 2.Exploratory Data Analysis (EDA): Analyze the dataset to gain insights into player performance 
 trends and relationships between various features.
+
 3.Model selection and training: Select appropriate machine learning algorithms, split the data into 
 training and testing sets, and train the models to make predictions.
+
 4.Model Evaluation and Comparison: Evaluate the performance of the trained models using 
 appropriate metrics and compare their accuracy to determine the most suitable model for predicting 
 players’ performance. This step also involves fine-tuning the models to optimize their accuracy, 
